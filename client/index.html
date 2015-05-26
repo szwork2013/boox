@@ -10,6 +10,7 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
@@ -19,9 +20,6 @@
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
-      <!-- injector:css -->
-      <link rel="stylesheet" href="app/app.css">
-      <!-- endinjector -->
     <!-- endbuild -->
   </head>
   <body ng-app="booxApp">
@@ -30,7 +28,42 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+    <div class="container-fluid wrap">
+      <div class="fix">
+        <div class="brand" ng-click="">Boox</div>
+        <ul class="nav nav-pills nav-stacked app-menu">
+          <li role="presentation"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">Menu item</a></li>
+          <li role="presentation"><a href="#">Another one</a></li>
+        </ul>
+      </div>
+      <div class="main" ng-controller="booksController">
+        <div class="row view-selectors">
+          <div class="col-xs-2">
+            <div class="btn-group btn-group-xs read-btns" role="group" aria-label="...">
+              <button type="button" class="btn btn-default">Read - 9</button>
+              <button type="button" class="btn btn-default">Unread - 15</button>
+              <button type="button" class="btn btn-default">All - {{rawContent.length}}</button>
+            </div>
+          </div>
+
+          <div class="col-xs-2 col-xs-offset-8">
+            <div class="btn-group btn-group-xs view-btns" role="group" aria-label="...">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></button>
+            </div>
+          </div>
+
+        </div>
+        <div id="bookView">
+          <div ng-repeat="book in rawContent">
+            <h4>{{book.title}}</h4>
+            <p>{{book.author}}, {{book.yearPublished}}</p>
+            <p>{{book.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>

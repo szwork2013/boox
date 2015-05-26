@@ -5,12 +5,16 @@ angular.module('booxApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute'
-])
-  .config(function ($routeProvider, $locationProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+], function() {
 
-    $locationProvider.html5Mode(true);
-  });
+}).controller('booksController', ['$scope', '$http', function($scope, $http) {
+  $http.get('/api/books').
+    success(function(data, status, headers, config) {
+      $scope.rawContent = data;
+    }).
+    error(function(data, status, headers, config) {
+      $scope.rawContent = "Sorry, error has occured";
+    });
+}])
+
+//$locationProvider.html5Mode(true);
