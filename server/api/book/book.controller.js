@@ -5,7 +5,10 @@ var Book = require('./book.model');
 
 // Get list of books
 exports.index = function(req, res) {
-  Book.find(function (err, books) {
+  var pageSize = 5,
+      pageNum = req.param('page');
+
+  Book.find({}, {}, { limit: 5 }, function (err, books) {
     if(err) { return handleError(res, err); }
     return res.json(200, books);
   });
