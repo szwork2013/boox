@@ -56,11 +56,23 @@
 }
 
 .brand {
-  font-size: 36pt;
-  text-align: center;
-  font-family: 'Pacifico';
-  cursor: pointer;
+   font-size: 36pt;
+   text-align: center;
+   font-family: 'Pacifico';
+   cursor: pointer;
+ }
+
+.brand a {
+  text-decoration: none;
+  color: #fff;
 }
+
+.brand a:hover,
+.brand a:focus,
+.brand a:active {
+  color: inherit;
+}
+
 
 .app-menu {
   margin-top: 10px;

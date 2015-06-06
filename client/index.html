@@ -30,7 +30,7 @@
     <!-- Add your site or application content here -->
     <div class="container-fluid wrap">
       <div class="fix">
-        <div class="brand" ng-click="">Boox</div>
+        <div class="brand"><a href="/">Boox</a></div>
         <ul class="nav nav-pills nav-stacked app-menu">
           <li role="presentation"><a href="#">Home</a></li>
           <li role="presentation"><a href="#">Menu item</a></li>
@@ -39,15 +39,15 @@
       </div>
       <div class="main" ng-controller="booksController">
         <div class="row view-selectors">
-          <div class="col-xs-2">
+          <div class="col-xs-3">
             <div class="btn-group btn-group-xs read-btns" role="group" aria-label="...">
-              <button type="button" class="btn btn-default">Read - 9</button>
-              <button type="button" class="btn btn-default">Unread - 15</button>
-              <button type="button" class="btn btn-default">All - {{rawContent.length}}</button>
+              <button type="button" class="btn btn-default">Read - {{counts.read}}</button>
+              <button type="button" class="btn btn-default">Unread - {{counts.unread}}</button>
+              <button type="button" class="btn btn-default">All - {{counts.total}}</button>
             </div>
           </div>
 
-          <div class="col-xs-2 col-xs-offset-8">
+          <div class="col-xs-2 col-xs-offset-7">
             <div class="btn-group btn-group-xs view-btns" role="group" aria-label="...">
               <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"></span></button>
               <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></button>
@@ -55,26 +55,28 @@
           </div>
 
         </div>
-        <div id="bookView">
+
+        <div id="bookView" ng-cloak >
           <div ng-repeat="book in rawContent">
-            <h4>{{book.title}}</h4>
+            <h4>{{book.title}} <img src="/assets/images/ok_icon.png" ng-show="book.read" >  </h4>
             <p>{{book.author}}, {{book.yearPublished}}</p>
             <p>{{book.description}}</p>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <paging
+              page="pageNum"
+              page-size="pageSize"
+              total="counts.total"
+              paging-action="changePage(page)">
+            </paging>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-XXXXX-X');
-      ga('send', 'pageview');
-    </script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -89,13 +91,13 @@
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/angular-route/angular-route.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-paging/paging.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>
